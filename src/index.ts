@@ -1,0 +1,4 @@
+import { SubdomainTo, verifyWebhook, type ClientOptions, type WebhookEvent } from '@subdomainto/node';
+import { getRequestHeader, readRawBody, type H3Event } from 'h3';
+export function createSubdomainToClient(options:Partial<ClientOptions>={}):SubdomainTo { const apiKey=options.apiKey??process.env.SUBDOMAINTO_API_KEY; if(!apiKey)throw new Error('SUBDOMAINTO_API_KEY is required.'); return new SubdomainTo({apiKey,baseUrl:options.baseUrl??process.env.SUBDOMAINTO_BASE_URL,fetch:options.fetch}); }
+export async function verifyWebhookEvent<T=Record<string,unknown>>(event:H3Event,secret=process.env.SUBDOMAINTO_WEBHOOK_SECRET):Promise<WebhookEvent<T>> { if(!secret)throw new Error('SUBDOMAINTO_WEBHOOK_SECRET is required.'); const body=await readRawBody(event); if(body===undefined)throw new TypeError('Webhook body is missing.'); return verifyWebhook<T>(body,getRequestHeader(event,'subdomainto-signature')??'',secret); }

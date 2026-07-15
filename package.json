@@ -1,0 +1,5 @@
+{
+  "name":"@subdomainto/nuxt","version":"0.1.0","description":"Nuxt server integration for subdomain.to.","type":"module","license":"MIT","sideEffects":false,
+  "exports":{".":{"types":"./dist/index.d.ts","import":"./dist/index.js"}},"files":["dist"],"scripts":{"build":"tsc -p tsconfig.json","typecheck":"tsc -p tsconfig.json --noEmit","test":"vitest run"},
+  "peerDependencies":{"nuxt":">=3 <5"},"dependencies":{"@subdomainto/node":"^0.1.0","h3":"^1.15 || ^2.0"},"devDependencies":{"@types/node":"^24.0.0","nuxt":"^4.0.0","typescript":"^5.9.0","vitest":"^3.2.0"}
+}
